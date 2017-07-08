@@ -8,6 +8,7 @@
 
 <script lang="js">
   export default {
+    // Convert to Angular, maybe Ionic?
     data: () => ({
       from: null,
       to: null,
@@ -37,6 +38,7 @@
       },
     },
     async mounted() {
+      //look into RTCPeerConnection() api
       this.pc = new RTCPeerConnection();
       this.pc.onicecandidate = e => {
         if (e.candidate) {
@@ -62,6 +64,8 @@
         video.src = window.URL.createObjectURL(e.stream);
         video.play();
       };
+      // generating a web socket, figure out how to handle
+      // constant stream of data for charts
       this.conn = new WebSocket('ws://localhost:8080');
       this.conn.onopen = () => {
         this.conn.onmessage = (message) => {
